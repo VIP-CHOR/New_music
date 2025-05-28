@@ -13,7 +13,7 @@
 </p>
 
 <h4 align="center">
-    jaanvi music
+    𝐌𝐀𝐇𝐀 𝐌𝐔𝐒𝐈𝐂 x IGNORE + CHOR
 </h4>
 
 
