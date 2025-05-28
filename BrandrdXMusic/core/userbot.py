@@ -74,7 +74,7 @@ class Userbot(Client):
                 await self.one.join_chat("DIL_KI_BATE_o")
                 await self.one.join_chat("Anurag_bhai_op")
                 await self.one.join_chat("All_super_music")
-                await self.one.join_chat("ANURAG_ABOUT")
+                await self.one.join_chat("TEAM_CHOR")
 
             except:
                 pass
@@ -104,7 +104,7 @@ class Userbot(Client):
                 await self.two.join_chat("DIL_KI_BATE_o")
                 await self.two.join_chat("Anurag_bhai_op")
                 await self.two.join_chat("All_super_music")
-                await self.two.join_chat("ANURAG_ABOUT")
+                await self.two.join_chat("TEAM_CHOR")
             except:
                 pass
             assistants.append(2)
@@ -128,7 +128,7 @@ class Userbot(Client):
                 await self.three.join_chat("DIL_KI_BATE_o")
                 await self.three.join_chat("Anurag_bhai_op")
                 await self.three.join_chat("All_super_music")
-                await self.three.join_chat("ANURAG_ABOUT")
+                await self.three.join_chat("TEAM_CHOR")
             except:
                 pass
             assistants.append(3)
@@ -151,7 +151,7 @@ class Userbot(Client):
                 await self.four.join_chat("DIL_KI_BATE_o")
                 await self.four.join_chat("Anurag_bhai_op")
                 await self.four.join_chat("All_super_music")
-                await self.four.join_chat("ANURAG_ABOUT")
+                await self.four.join_chat("TEAM_CHOR")
             except:
                 pass
             assistants.append(4)
@@ -174,7 +174,7 @@ class Userbot(Client):
                 await self.five.join_chat("DIL_KI_BATE_o")
                 await self.five.join_chat("Anurag_bhai_op")
                 await self.five.join_chat("All_super_music")
-                await self.five.join_chat("ANURAG_ABOUT")
+                await self.five.join_chat("TEAM_CHOR")
             except:
                 pass
             assistants.append(5)
