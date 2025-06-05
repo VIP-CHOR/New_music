@@ -50,7 +50,7 @@ async def init():
         pass
     await Hotty.decorators()
     LOGGER("BrandrdXMusic").info(
-        "ᴅʀᴏᴘ ʏᴏᴜʀ ɢɪʀʟꜰʀɪᴇɴᴅ'ꜱ ɴᴜᴍʙᴇʀ ᴀᴛ @BRANDED_PAID_CC ᴊᴏɪɴ @Amitamusicbot , @TEAM_CHOR ꜰᴏʀ ᴀɴʏ ɪꜱꜱᴜᴇꜱ"
+        "ᴅʀᴏᴘ ʏᴏᴜʀ ɢɪʀʟꜰʀɪᴇɴᴅ'ꜱ ɴᴜᴍʙᴇʀ ᴀᴛ @Music_Update_143 ᴊᴏɪɴ @Amitamusicbot , @TEAM_CHOR ꜰᴏʀ ᴀɴʏ ɪꜱꜱᴜᴇꜱ"
     )
     await idle()
     await app.stop()
