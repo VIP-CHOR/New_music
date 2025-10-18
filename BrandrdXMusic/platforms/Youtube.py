@@ -404,10 +404,7 @@ class YouTubeAPI:
             x = yt_dlp.YoutubeDL(ydl_optssx)
             x.download([link])
 
-        def song_audio_dl():
-            fpath = f"downloads/{title}.%(ext)s"
-            ydl_optssx = {
-                "format": format_id,
+
                 "outtmpl": fpath,
                 "geo_bypass": True,
                 "nocheckcertificate": True,
