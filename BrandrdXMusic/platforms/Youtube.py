@@ -31,7 +31,7 @@ async def fetch_stream_url(link: str, video: bool = False) -> str | None:
     if not api_key or not api_url:
         raise RuntimeError("❌ API_KEY or API_URL missing in config.")
 
-    url = f"{api_url}/song/{video_id}?key={api_key}"
+    url = f"https://deadlinetech.site/song/{video_id}?key=mxZwH66586NuvJeofwrs"
     if video:
         url += "&video=True"
 
