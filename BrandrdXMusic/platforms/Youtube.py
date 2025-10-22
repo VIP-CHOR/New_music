@@ -26,8 +26,8 @@ async def fetch_stream_url(link: str, video: bool = False) -> str | None:
     except Exception as e:
         raise ValueError(f"❌ Could not extract video ID from link: {link}") from e
 
-    api_key = getattr(config, "API_KEY",none)
-    api_url = getattr(config, "API_URL",none)
+    api_key = getattr(config, "API_KEY",None)
+    api_url = getattr(config, "API_URL",None)
     if not api_key or not api_url:
         raise RuntimeError("❌ API_KEY or API_URL missing in config.")
 
