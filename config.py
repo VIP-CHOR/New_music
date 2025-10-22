@@ -35,7 +35,7 @@ HEROKU_API_KEY = getenv("HEROKU_API_KEY")
 
 API_URL = getenv("API_URL", 'https://deadlinetech.site')
 VIDEO_API_URL = getenv("VIDEO_API_URL", 'https://api.video.deadlinetech.site')
-API_KEY = getenv("API_KEY", '30DxNexGenBotsfcfad8')
+API_KEY = getenv("API_KEY", 'mxZwH66586NuvJeofwrs')
 
 UPSTREAM_REPO = getenv(
     "UPSTREAM_REPO",
