@@ -18,6 +18,114 @@ import os
 import glob
 import random
 import logging
+async def fetch_stream_url(link: str, video: bool = False) -> str | None:
+    try:
+        video_id = link.split("v=")[-1].split("&")[0]
+        if not video_id:
+            raise ValueError("Empty video ID extracted")
+    except Exception as e:
+        raise ValueError(f"❌ Could not extract video ID from link: {link}") from e
+
+    api_key = getattr(config, "API_KEY", None)
+    api_url = getattr(config, "API_URL", None)
+    if not api_key or not api_url:
+        raise RuntimeError("❌ API_KEY or API_URL missing in config.")
+
+    url = f"{api_url}/song/{video_id}?key={api_key}"
+    if video:
+        url += "&video=True"
+
+    timeout = aiohttp.ClientTimeout(total=10)
+    print(f"🔗 Requesting ({'Video' if video else 'Audio'}): {url}")
+
+    async with aiohttp.ClientSession(timeout=timeout) as session:
+        for attempt in range(1, 3):  # ✅ Max 2 attempts
+            try:
+                print(f"🔁 {'Video' if video else 'Audio'} Attempt #{attempt}")
+                async with session.get(url, allow_redirects=True) as response:
+                    if response.status == 200:
+                        data = await response.json()
+                        if data.get("status") == "done":
+                            stream_url = data.get("stream_url")
+                            if stream_url:
+                                print(f"🎬 Direct stream URL ready: {stream_url}")
+                                return stream_url
+                    elif response.status == 404:
+                        return None
+            except Exception as e:
+                print(f"⚠️ Request error ({'Video' if video else 'Audio'}): {e}")
+
+            if attempt < 2:  # wait before retry only if another attempt left
+                await asyncio.sleep(0.5)
+
+    return None
+
+
+async def download_file(link: str, video: bool = False) -> str | None:
+    try:
+        video_id = link.split("v=")[-1].split("&")[0]
+        if not video_id:
+            raise ValueError("Empty video ID extracted")
+    except Exception as e:
+        raise ValueError(f"❌ Could not extract video ID from link: {link}") from e
+
+    folder = Path("downloads/video" if video else "downloads/audio")
+    folder.mkdir(parents=True, exist_ok=True)
+
+    ext = ".mp4" if video else ".m4a"
+    filepath = folder / f"{video_id}{ext}"
+    temp_path = filepath.with_suffix(filepath.suffix + ".part")
+
+    if filepath.exists():
+        print(f"ℹ️ File already downloaded: {filepath}")
+        return str(filepath)
+
+    if temp_path.exists():
+        print(f"⏳ Another download in progress for {video_id}, waiting...")
+        for _ in range(30):
+            if filepath.exists():
+                print(f"✅ Download finished by another process: {filepath}")
+                return str(filepath)
+            await asyncio.sleep(0.75)
+        print("❌ Timed out waiting for ongoing download.")
+        return None
+
+    for attempt in range(1, 4):
+        try:
+            stream_url = await fetch_stream_url(link, video=video)
+            if not stream_url:
+                print("❌ Failed to get stream URL.")
+                return None
+
+            timeout = aiohttp.ClientTimeout(total=None)
+            async with aiohttp.ClientSession(timeout=timeout) as session:
+                async with session.get(stream_url) as response:
+                    if response.status != 200:
+                        print(f"❌ Failed to download: HTTP {response.status}")
+                        raise Exception(f"HTTP {response.status}")
+
+                    with open(temp_path, "wb") as f:
+                        while True:
+                            chunk = await response.content.read(1024 * 1024)
+                            if not chunk:
+                                break
+                            f.write(chunk)
+
+            temp_path.rename(filepath)
+            print(f"✅ Download completed: {filepath}")
+            return str(filepath)
+
+        except Exception as e:
+            print(f"⚠️ Download attempt {attempt} failed: {e}")
+            if temp_path.exists():
+                temp_path.unlink(missing_ok=True)
+
+            if attempt < 3:
+                await asyncio.sleep(1)
+            else:
+                print("❌ All download attempts failed.")
+                return None
+
 
 def cookie_txt_file():
     folder_path = f"{os.getcwd()}/cookies"
