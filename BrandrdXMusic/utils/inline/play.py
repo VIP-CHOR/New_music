@@ -73,7 +73,7 @@ def stream_markup_timer(_, vidid, chat_id, played, dur):
         ],
         
         [
-            InlineKeyboardButton(text="🥂  ᴀᴅᴅ ᴍᴇ ʏᴏᴜʀ ɢʀᴏᴜᴘ 🥂", url=f"https://t.me/Amitamusicbot?startgroup=s&admin=delete_messages+manage_video_chats+pin_messages+invite_users"),
+            InlineKeyboardButton(text="🌸Aᴅᴅ Mᴇ🌸", url=f"https://t.me/Amitamusicbot?startgroup=s&admin=delete_messages+manage_video_chats+pin_messages+invite_users"),
         InlineKeyboardButton(text=_["CLOSE_BUTTON"], callback_data="close"), 
         ],
     ]
